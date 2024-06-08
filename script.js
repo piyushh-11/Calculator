@@ -7,21 +7,23 @@ let inputString = "";
 const buttons = document.querySelector(".buttons");
 const screen = document.querySelector(".calculation")
 
+screen.textContent = 0;
+
 buttons.addEventListener("click", event => {
     if (event.target.nodeName == "BUTTON") {
         let curr = event.target.textContent
         inputString += curr;
 
         if (curr == "C") {
-            inputString = "";
+            inputString = "0";
         } else if (curr == "=") {
             evaluate(inputString)
             inputString = "";
         }
-        console.log(inputString);
+        screen.textContent = inputString;
     }
 });
 
 function evaluate(equation) {
-    alert("evaluate");
+    alert(equation);
 }
