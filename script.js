@@ -27,7 +27,28 @@ buttons.addEventListener("click", event => {
         } else if (operators.includes(curr)) {
             if (hasOperator) {
                 let chars = inputString.split("");
-                hasOperator = true;
+                let leftSide = "";
+                let rightSide = "";
+                let left = true;
+
+                console.log(chars);
+
+                for (let i = 0; i < chars.length; i++) {
+                    let current = chars[i];
+
+                    if (operators.includes(current)) {
+                        operator = current;
+                        left = false;
+                    } else if (left) {
+                        leftSide += current;
+                    } else {
+                        rightSide += current;
+                    }
+                }
+
+                console.log("Left Side: ", leftSide);
+                console.log("Operator: ", operator);
+                console.log("Right Side: ", rightSide);
             } else {
                 inputString += curr;
                 hasOperator = true;
