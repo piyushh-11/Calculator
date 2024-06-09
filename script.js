@@ -75,6 +75,6 @@ function operate(numOne, numTwo, operator) {
     } else if (operator == "*") {
         return (numOne * numTwo);
     } else {
-        return (numOne / numTwo);
+        return (numOne / numTwo).toFixed(2);
     }
 }
