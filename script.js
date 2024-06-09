@@ -21,7 +21,7 @@ buttons.addEventListener("click", event => {
             hasOperator = false;
         } else if (curr == "=") {
             inputString += curr;
-            evaluate(inputString)
+            evaluate()
             inputString = "";
             hasOperator = false;
         } else if (operators.includes(curr)) {
@@ -30,8 +30,6 @@ buttons.addEventListener("click", event => {
                 let leftSide = "";
                 let rightSide = "";
                 let left = true;
-
-                console.log(chars);
 
                 for (let i = 0; i < chars.length; i++) {
                     let current = chars[i];
@@ -46,9 +44,11 @@ buttons.addEventListener("click", event => {
                     }
                 }
 
-                console.log("Left Side: ", leftSide);
-                console.log("Operator: ", operator);
-                console.log("Right Side: ", rightSide);
+                numOne = +leftSide;
+                numTwo = +rightSide;
+
+                inputString = evaluate(numOne, numTwo, operator) + curr;
+
             } else {
                 inputString += curr;
                 hasOperator = true;
@@ -66,6 +66,13 @@ buttons.addEventListener("click", event => {
 });
 
 function evaluate(numOne, numTwo, operator) {
-    console.log(numOne + operator + numTwo);
-    return "value";
+    if (operator == "+") {
+        return (numOne + numTwo);
+    } else if (operator == "-") {
+        return (numOne - numTwo);
+    } else if (operator == "*") {
+        return (numOne * numTwo);
+    } else {
+        return (numOne / numTwo);
+    }
 }
