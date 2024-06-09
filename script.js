@@ -20,35 +20,12 @@ buttons.addEventListener("click", event => {
             inputString = "0";
             hasOperator = false;
         } else if (curr == "=") {
-            inputString += curr;
-            evaluate()
-            inputString = "";
+            inputString = evaluate(inputString);
             hasOperator = false;
         } else if (operators.includes(curr)) {
             if (hasOperator) {
-                let chars = inputString.split("");
-                let leftSide = "";
-                let rightSide = "";
-                let left = true;
-
-                for (let i = 0; i < chars.length; i++) {
-                    let current = chars[i];
-
-                    if (operators.includes(current)) {
-                        operator = current;
-                        left = false;
-                    } else if (left) {
-                        leftSide += current;
-                    } else {
-                        rightSide += current;
-                    }
-                }
-
-                numOne = +leftSide;
-                numTwo = +rightSide;
-
-                inputString = evaluate(numOne, numTwo, operator) + curr;
-
+                inputString = evaluate(inputString) + curr;
+                hasOperator = true;
             } else {
                 inputString += curr;
                 hasOperator = true;
@@ -65,7 +42,32 @@ buttons.addEventListener("click", event => {
     }
 });
 
-function evaluate(numOne, numTwo, operator) {
+function evaluate(inputString) {
+    let chars = inputString.split("");
+    let leftSide = "";
+    let rightSide = "";
+    let left = true;
+
+    for (let i = 0; i < chars.length; i++) {
+        let current = chars[i];
+
+        if (operators.includes(current)) {
+            operator = current;
+            left = false;
+        } else if (left) {
+            leftSide += current;
+        } else {
+            rightSide += current;
+        }
+    }
+
+    numOne = +leftSide;
+    numTwo = +rightSide;
+
+    return operate(numOne, numTwo, operator);
+}
+
+function operate(numOne, numTwo, operator) {
     if (operator == "+") {
         return (numOne + numTwo);
     } else if (operator == "-") {
