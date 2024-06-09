@@ -17,7 +17,6 @@ buttons.addEventListener("click", event => {
         
 
         if (curr == "C") {
-            //inputString += curr;
             inputString = "0";
             hasOperator = false;
         } else if (curr == "=") {
